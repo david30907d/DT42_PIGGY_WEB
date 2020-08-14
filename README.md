@@ -1,70 +1,12 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# DT42 Piggy Web ![Docker Image CI](https://github.com/david30907d/DT42_PIGGY_API/workflows/Docker%20Image%20CI/badge.svg)
 
-## Output Data
+This Web of Piggy Project
 
-```json
-/* Generic Output Data Format */
-{   
-    /* Generic Input Data, convert bytes to image_blob */
-    "compression": "jpeg",
-    "image_blob": <base64str>,
-    "channel": 0,
-    "timestamp": "2017-09-28T04:55:01.186Z",
-    
-    /* Generic Inference Result Format
-     */
-    "annotations": [
-        {  
-           "type": "detection",
-           "label": "person",
-           "confidence": 0.93,
-           "top": 100,
-           "bottom": 200,
-           "left": 50,
-           "right": 128
-        },
-        ...
-        {  
-           "type": "classification",
-           "label": "fight",
-           "confidence": 0.63
-        },
-        ...
-    ]
-}
-```
+## Install
 
-settings.json
-
-```json
-{
-  "0": {
-    "input": {
-      "codec": "H.264",
-      "srcMode": "byte_stream",
-      "name": "Input source #0",
-      "src": "rtsp://10.0.0.43:8554/live.sdp",
-      "width": 1920,
-      "height": 1080
-    },
-    "output": {
-      "threshold": 0,
-      "resultServer": "http://192.168.101.1:8088"
-    },
-    "roi": {
-      "roi": [
-        {
-          "left": 106,
-          "overlap_threshold": 0,
-          "bottom": 198,
-          "right": 346,
-          "top": 77
-        }
-      ]
-    }
-  }
-}
-```
+Npm dependencies, for linter, formatter and commit linter (optional):
+1. `brew install npm`
+2. `npm ci`
 
 ## Available Scripts
 
