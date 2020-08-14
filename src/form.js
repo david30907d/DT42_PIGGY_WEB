@@ -1,58 +1,97 @@
 import React from 'react'
 import { Button, Form, Message } from 'semantic-ui-react'
-const fs = require('fs');
 
-var required = true;
 export default class FormExampleFieldErrorLabel extends React.Component {
-    handleSubmit() {
-        let student = { "payload": { "dd22d222222": 2 }, "filepath": "./" };
+    constructor(props) {
+        super(props);
+        this.state = {
+            payload: {
+                Application: '',
+                Source: '',
+                Codec: '',
+                Width: '',
+                Height: '',
+            },
+            filepath: './',
+            formStatus: null
+        }
+    }
+    handleChange = (e, { name, value }) => {
+        let state = this.state
+        state.payload[name] = value
+        this.setState(state)
+    }
+    handleSubmit = () => {
+        console.log(this.state)
         let url = 'http://127.0.0.1:9000/settings';
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify(student),
+            body: JSON.stringify(this.state),
             headers: new Headers({
                 'Content-Type': 'application/json'
             })
         })
-        .then(response => response.json())
-        .then(jsonData => console.log(jsonData))
-        .catch(err => console.log('錯誤:', err))
+            .then(response => response.json())
+            .then(jsonData => {
+                this.setState({formStatus:true})
+                console.log(jsonData)
+            })
+            .catch(err => console.log('error:', err))
+        
     }
     render() {
-        return (<Form success={required}>
+        const { Application,
+            Source,
+            Codec,
+            Width,
+            Height,
+        } = this.state
+        return (<Form success={this.state.formStatus}>
             <Form.Input
-                error={{ content: 'Please enter your first name', pointing: 'below' }}
                 fluid
                 label='Application'
+                name='Application'
+                value={Application}
+                onChange={this.handleChange}
                 placeholder='Name of camera'
                 id='form-input-first-name'
             />
             <Form.Input
-                error='Please enter your last name'
                 fluid
                 label='Source'
+                name='Source'
+                value={Source}
+                onChange={this.handleChange}
                 placeholder='rtsp://ip'
             />
             <Form.Input
-                error='Please enter your last name'
                 fluid
                 label='Codec'
+                name='Codec'
+                value={Codec}
+                onChange={this.handleChange}
                 placeholder='rtsp://ip'
             />
             <Form.Input
                 fluid
                 label='Width'
+                name='Width'
+                value={Width}
+                onChange={this.handleChange}
                 placeholder='In width'
             />
             <Form.Input
                 fluid
                 label='Height'
+                name='Height'
+                value={Height}
+                onChange={this.handleChange}
                 placeholder='In cm'
             />
             <Message
                 success
                 header='Form Completed'
-                content="You're all signed up for the newsletter"
+                content="You've finish all the settings of BerryNet!"
             />
             <Button onClick={this.handleSubmit}>Submit</Button>
         </Form>)
