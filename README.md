@@ -1,4 +1,4 @@
-# DT42 Piggy Web ![Docker Image CI](https://github.com/david30907d/DT42_PIGGY_API/workflows/Docker%20Image%20CI/badge.svg)
+# DT42 Piggy Web ![Node.js CI](https://github.com/david30907d/DT42_PIGGY_WEB/workflows/Node.js%20CI/badge.svg)
 
 This Web of Piggy Project
 
