@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'semantic-ui-css/semantic.min.css'
+import HeaderAndMenu from './header.js'
+import FormExampleFieldErrorLabel from "./form.js";
+import CameraPanes from "./cameraPanes.js"
+
 function Square(props) {
     return (
         <button className="square" onClick={props.onClick}>
@@ -62,7 +66,7 @@ class Board extends React.Component {
     }
 }
 
-class Game extends React.Component {
+class Index extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -90,47 +94,14 @@ class Game extends React.Component {
             xIsNext: !this.state.xIsNext,
         });
     }
-    jumpTo(step) {
-        this.setState({
-            stepNumber: step,
-            xIsNext: (step % 2) === 0,
-        });
-    }
+
     render() {
-        const history = this.state.history;
-        const current = history[this.state.stepNumber];
-        const winner = calculateWinner(current.squares);
-        console.log(history)
-        const moves = history.map((step, move) => {
-            console.log(step, move)
-            const desc = move ?
-                'Go to move #' + move :
-                'Go to game start';
-            return (
-                <li key={move}>
-                    <button onClick={() => this.jumpTo(move)}>{desc}</button>
-                </li>
-            );
-        });
-        let status;
-        if (winner) {
-            status = 'Winner: ' + winner;
-        } else {
-            status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
-        }
 
         return (
             <div className="game">
-                <div className="game-board">
-                    <Board
-                        squares={current.squares}
-                        onClick={(i) => this.handleClick(i)}
-                    />
-                </div>
-                <div className="game-info">
-                    <div>{status}</div>
-                    <ol>{moves}</ol>
-                </div>
+                <HeaderAndMenu/>
+                <CameraPanes/>
+                <FormExampleFieldErrorLabel/>
             </div>
         );
     }
@@ -139,6 +110,6 @@ class Game extends React.Component {
 // ========================================
 
 ReactDOM.render(
-    <Game />,
+    <Index />,
     document.getElementById('root')
 );
