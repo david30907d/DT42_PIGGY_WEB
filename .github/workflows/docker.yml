@@ -36,6 +36,7 @@ jobs:
     - name: Run test
       run: |
         docker run --rm -p 5000:5000 -itd ${RC_NAME}:${GITHUB_SHA}
+        sleep 3
         curl -XGET http://localhost:5000
         [ $? -eq 0 ]  || exit 1
 
