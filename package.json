@@ -54,6 +54,7 @@
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
     "pretty": "^2.0.0",
-    "pretty-quick": "^2.0.1"
+    "pretty-quick": "^2.0.1",
+    "react-test-renderer": "^16.13.1"
   }
 }
