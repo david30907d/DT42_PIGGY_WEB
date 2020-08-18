@@ -58,6 +58,7 @@ export default class HeaderAndMenu extends Component {
             />
           </Menu.Menu>
         </Menu>
+        <CameraPanes />
 
         <Header as="h2" icon textAlign="center">
           <Icon name="users" circular />
@@ -71,7 +72,6 @@ export default class HeaderAndMenu extends Component {
 
         <Switch>
           <Route exact path="/">
-            <CameraPanes />
             <FormForSettings />
           </Route>
           <Route exact path="/realtime">
