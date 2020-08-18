@@ -13,7 +13,8 @@ export default class FormExampleFieldErrorLabel extends React.Component {
         Height: "",
       },
       filepath: "./",
-      formStatus: null,
+      successState: null,
+      errorState: null,
     };
   }
   handleChange = (e, { name, value }) => {
@@ -21,9 +22,14 @@ export default class FormExampleFieldErrorLabel extends React.Component {
     state.payload[name] = value;
     this.setState(state);
   };
+
   handleSubmit = () => {
     console.log(this.state);
-    let url = "http://127.0.0.1:9000/settings";
+    let url = "http://127.0.0.1:8000/settings";
+    if (!this.checkBeforeSubmit()) {
+      this.setState({ errorState: true });
+      return;
+    }
     fetch(url, {
       method: "POST",
       body: JSON.stringify(this.state),
@@ -33,15 +39,27 @@ export default class FormExampleFieldErrorLabel extends React.Component {
     })
       .then((response) => response.json())
       .then((jsonData) => {
-        this.setState({ formStatus: true });
-        console.log(jsonData);
+        this.setState({ successState: true });
       })
       .catch((err) => console.log("error:", err));
+  };
+
+  checkBeforeSubmit = () => {
+    if (
+      this.state.payload.Application !== "" &&
+      this.state.payload.Source !== "" &&
+      this.state.payload.Codec !== "" &&
+      this.state.payload.Width !== "" &&
+      this.state.payload.Height !== ""
+    ) {
+      return true;
+    }
+    return false;
   };
   render() {
     const { Application, Source, Codec, Width, Height } = this.state;
     return (
-      <Form success={this.state.formStatus}>
+      <Form success={this.state.successState} error={this.state.errorState}>
         <Form.Input
           fluid
           label="Application"
@@ -87,6 +105,11 @@ export default class FormExampleFieldErrorLabel extends React.Component {
           success
           header="Form Completed"
           content="You've finish all the settings of BerryNet!"
+        />
+        <Message
+          error
+          header="Form incomplete"
+          content="All fields are required!"
         />
         <Button onClick={this.handleSubmit}>Submit</Button>
       </Form>

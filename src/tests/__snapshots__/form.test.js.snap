@@ -114,6 +114,22 @@ exports[`Test Forum components 1`] = `
       </p>
     </div>
   </div>
+  <div
+    className="ui error message"
+  >
+    <div
+      className="content"
+    >
+      <div
+        className="header"
+      >
+        Form incomplete
+      </div>
+      <p>
+        All fields are required!
+      </p>
+    </div>
+  </div>
   <button
     className="ui button"
     onClick={[Function]}
