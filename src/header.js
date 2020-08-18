@@ -9,10 +9,11 @@ import RealTimeImage from "./realtime.js";
 export default class HeaderAndMenu extends Component {
   constructor(props) {
     super(props);
-    this.state = { activeItem: "輸入影像設定" };
+    this.state = { activeItem: "輸入影像設定", search: window.location.search };
   }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+  handleItemClick = (e, { name }) =>
+    this.setState({ activeItem: name, search: window.location.search });
 
   render() {
     const { activeItem } = this.state;
@@ -21,28 +22,28 @@ export default class HeaderAndMenu extends Component {
         <Menu pointing secondary>
           <Menu.Item
             as={Link}
-            to={{ pathname: "/", search: window.location.search }}
+            to={{ pathname: "/", search: this.state.search }}
             name="輸入影像設定"
             active={activeItem === "輸入影像設定"}
             onClick={this.handleItemClick}
           />
           <Menu.Item
             as={Link}
-            to={{ pathname: "/annotations", search: window.location.search }}
+            to={{ pathname: "/annotations", search: this.state.search }}
             name="訓練資料標注"
             active={activeItem === "訓練資料標注"}
             onClick={this.handleItemClick}
           />
           <Menu.Item
             as={Link}
-            to={{ pathname: "/realtime", search: window.location.search }}
+            to={{ pathname: "/realtime", search: this.state.search }}
             name="即時影像辨識"
             active={activeItem === "即時影像辨識"}
             onClick={this.handleItemClick}
           />
           <Menu.Item
             as={Link}
-            to={{ pathname: "/dashboard", search: window.location.search }}
+            to={{ pathname: "/dashboard", search: this.state.search }}
             name="辨識結果分析"
             active={activeItem === "辨識結果分析"}
             onClick={this.handleItemClick}
@@ -50,7 +51,7 @@ export default class HeaderAndMenu extends Component {
           <Menu.Menu position="right">
             <Menu.Item
               as={Link}
-              to={{ pathname: "/logout", search: window.location.search }}
+              to={{ pathname: "/logout", search: this.state.search }}
               name="logout"
               active={activeItem === "logout"}
               onClick={this.handleItemClick}
