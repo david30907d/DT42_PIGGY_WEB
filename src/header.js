@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header, Icon, Image, Menu, Segment } from "semantic-ui-react";
+import { Header, Icon, Image, Menu } from "semantic-ui-react";
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 import Dashboard from "./dashboard.js";
 import FormForSettings from "./form.js";
@@ -16,34 +16,33 @@ export default class HeaderAndMenu extends Component {
 
   render() {
     const { activeItem } = this.state;
-
     return (
       <Router>
         <Menu pointing secondary>
           <Menu.Item
             as={Link}
-            to="/"
+            to={{ pathname: "/", search: window.location.search }}
             name="輸入影像設定"
             active={activeItem === "輸入影像設定"}
             onClick={this.handleItemClick}
           />
           <Menu.Item
             as={Link}
-            to="/annotations"
+            to={{ pathname: "/annotations", search: window.location.search }}
             name="訓練資料標注"
             active={activeItem === "訓練資料標注"}
             onClick={this.handleItemClick}
           />
           <Menu.Item
             as={Link}
-            to="/realtime"
+            to={{ pathname: "/realtime", search: window.location.search }}
             name="即時影像辨識"
             active={activeItem === "即時影像辨識"}
             onClick={this.handleItemClick}
           />
           <Menu.Item
             as={Link}
-            to="/dashboard"
+            to={{ pathname: "/dashboard", search: window.location.search }}
             name="辨識結果分析"
             active={activeItem === "辨識結果分析"}
             onClick={this.handleItemClick}
@@ -51,7 +50,7 @@ export default class HeaderAndMenu extends Component {
           <Menu.Menu position="right">
             <Menu.Item
               as={Link}
-              to="/logout"
+              to={{ pathname: "/logout", search: window.location.search }}
               name="logout"
               active={activeItem === "logout"}
               onClick={this.handleItemClick}
