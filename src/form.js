@@ -12,7 +12,7 @@ export default class FormExampleFieldErrorLabel extends React.Component {
         Width: "",
         Height: "",
       },
-      filepath: "./",
+      filepath: "",
       successState: null,
       errorState: null,
     };
@@ -20,6 +20,9 @@ export default class FormExampleFieldErrorLabel extends React.Component {
   handleChange = (e, { name, value }) => {
     let state = this.state;
     state.payload[name] = value;
+    const params = new URLSearchParams(window.location.search);
+    const cameraId = params.get("cameraId");
+    state.filepath = `./${cameraId}`;
     this.setState(state);
   };
 
