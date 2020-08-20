@@ -15,25 +15,34 @@ export default class CameraPanes extends Component {
     });
     this.setState({ dropdownText: value });
   };
+  handleCreateCamera = () => {
+    let storage = window.localStorage;
+    let amountOfCamera = storage.length + 1;
+    storage[`Camera ${amountOfCamera}`] = `camera${amountOfCamera}`;
+    this.forceUpdate();
+  };
+
   render() {
+    let storage = window.localStorage;
     return (
       <Dropdown text={this.state.dropdownText}>
         <Dropdown.Menu>
           <Dropdown.Item
-            onClick={() => this.handleClick("camera1")}
-            text="Camera 1"
-            description="門口那台"
+            onClick={this.handleCreateCamera}
+            text="新增 Camera"
+            description="ID 會遞增"
           />
-          <Dropdown.Item
-            onClick={() => this.handleClick("camera2")}
-            text="Camera 2"
-            description="柱子那台"
-          />
-          <Dropdown.Item
-            onClick={() => this.handleClick("camera3")}
-            text="Camera 3"
-            description="剩下那台"
-          />
+          {Object.entries(storage)
+            .sort()
+            .map((tuple, index) => {
+              return (
+                <Dropdown.Item
+                  key={index}
+                  onClick={() => this.handleClick(tuple[1])}
+                  text={tuple[0]}
+                />
+              );
+            })}
         </Dropdown.Menu>
       </Dropdown>
     );
