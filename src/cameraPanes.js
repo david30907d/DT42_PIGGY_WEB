@@ -21,6 +21,11 @@ export default class CameraPanes extends Component {
     storage[`Camera ${amountOfCamera}`] = `camera${amountOfCamera}`;
     this.forceUpdate();
   };
+  handleDeleteCamera = () => {
+    let storage = window.localStorage;
+    storage.removeItem(`Camera ${storage.length}`);
+    this.forceUpdate();
+  };
 
   render() {
     let storage = window.localStorage;
@@ -31,6 +36,11 @@ export default class CameraPanes extends Component {
             onClick={this.handleCreateCamera}
             text="新增 Camera"
             description="ID 會遞增"
+          />
+          <Dropdown.Item
+            onClick={this.handleDeleteCamera}
+            text="刪除 Camera"
+            description="ID 會遞減"
           />
           {Object.entries(storage)
             .sort()
