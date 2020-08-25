@@ -14,15 +14,16 @@ export default class HeaderAndMenu extends Component {
     this.state = { activeItem: "輸入影像設定", search: window.location.search };
   }
 
-  handleItemClick = (e, { name }) =>
-    this.setState({ activeItem: name, search: window.location.search });
+  handleItemClick = (e, { name }) => {
+    this.setState({ activeItem: name });
+  };
 
   handleCameraClick = (value) => {
     history.push({
       pathname: window.location.pathname,
       search: `?cameraId=${value}`,
     });
-    this.setState({ dropdownText: value });
+    this.setState({ search: window.location.search });
   };
   handleCreateCamera = () => {
     let storage = window.localStorage;
@@ -36,7 +37,6 @@ export default class HeaderAndMenu extends Component {
     this.forceUpdate();
   };
   render() {
-    const { activeItem } = this.state;
     return (
       <Router>
         <Menu pointing secondary>
@@ -44,28 +44,28 @@ export default class HeaderAndMenu extends Component {
             as={Link}
             to={{ pathname: "/", search: this.state.search }}
             name="輸入影像設定"
-            active={activeItem === "輸入影像設定"}
+            active={this.state.activeItem === "輸入影像設定"}
             onClick={this.handleItemClick}
           />
           <Menu.Item
             as={Link}
             to={{ pathname: "/annotations", search: this.state.search }}
             name="訓練資料標注"
-            active={activeItem === "訓練資料標注"}
+            active={this.state.activeItem === "訓練資料標注"}
             onClick={this.handleItemClick}
           />
           <Menu.Item
             as={Link}
             to={{ pathname: "/realtime", search: this.state.search }}
             name="即時影像辨識"
-            active={activeItem === "即時影像辨識"}
+            active={this.state.activeItem === "即時影像辨識"}
             onClick={this.handleItemClick}
           />
           <Menu.Item
             as={Link}
             to={{ pathname: "/dashboard", search: this.state.search }}
             name="辨識結果分析"
-            active={activeItem === "辨識結果分析"}
+            active={this.state.activeItem === "辨識結果分析"}
             onClick={this.handleItemClick}
           />
           <Menu.Menu position="right">
@@ -73,7 +73,7 @@ export default class HeaderAndMenu extends Component {
               as={Link}
               to={{ pathname: "/logout", search: this.state.search }}
               name="logout"
-              active={activeItem === "logout"}
+              active={this.state.activeItem === "logout"}
               onClick={this.handleItemClick}
             />
           </Menu.Menu>
