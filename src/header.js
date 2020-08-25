@@ -72,10 +72,10 @@ export default class HeaderAndMenu extends Component {
 
         <Switch>
           <Route exact path="/">
-            <FormForSettings />
+            <FormForSettings search={this.state.search} />
           </Route>
           <Route exact path="/realtime">
-            <RealTimeImage />
+            <RealTimeImage search={this.state.search} />
           </Route>
           <Route exact path="/dashboard">
             <Dashboard />

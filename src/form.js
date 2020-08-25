@@ -20,7 +20,7 @@ export default class FormExampleFieldErrorLabel extends React.Component {
   handleChange = (e, { name, value }) => {
     let state = this.state;
     state.payload[name] = value;
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(this.props.search);
     const cameraId = params.get("cameraId");
     state.filepath = `./${cameraId}`;
     this.setState(state);
