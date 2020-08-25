@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Header, Icon, Image, Menu } from "semantic-ui-react";
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 import Dashboard from "./dashboard.js";
+import history from "history/browser";
+
 import FormForSettings from "./form.js";
 import CameraPanes from "./cameraPanes.js";
 import RealTimeImage from "./realtime.js";
@@ -15,6 +17,24 @@ export default class HeaderAndMenu extends Component {
   handleItemClick = (e, { name }) =>
     this.setState({ activeItem: name, search: window.location.search });
 
+  handleCameraClick = (value) => {
+    history.push({
+      pathname: window.location.pathname,
+      search: `?cameraId=${value}`,
+    });
+    this.setState({ dropdownText: value });
+  };
+  handleCreateCamera = () => {
+    let storage = window.localStorage;
+    let amountOfCamera = storage.length + 1;
+    storage[`Camera ${amountOfCamera}`] = `camera${amountOfCamera}`;
+    this.forceUpdate();
+  };
+  handleDeleteCamera = () => {
+    let storage = window.localStorage;
+    storage.removeItem(`Camera ${storage.length}`);
+    this.forceUpdate();
+  };
   render() {
     const { activeItem } = this.state;
     return (
@@ -58,7 +78,11 @@ export default class HeaderAndMenu extends Component {
             />
           </Menu.Menu>
         </Menu>
-        <CameraPanes />
+        <CameraPanes
+          cameraClick={this.handleCameraClick}
+          createCamera={this.handleCreateCamera}
+          deleteCamera={this.handleDeleteCamera}
+        />
 
         <Header as="h2" icon textAlign="center">
           <Icon name="users" circular />
