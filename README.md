@@ -10,7 +10,7 @@ Npm dependencies, for linter, formatter and commit linter (optional):
 
 ## Run
 
-1. Docker: `docker run --rm -p 5000:5000 -it dt42-piggy-front-end`
+1. Docker: `docker run --rm -p 3000:5000 -it dt42-piggy-front-end`
 2. Local: `npm start`
 
 ## Available Scripts
