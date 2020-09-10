@@ -10,8 +10,8 @@ Npm dependencies, for linter, formatter and commit linter (optional):
 
 ## Run
 
-1. Build image: `docker build -t dt42-piggy-front-end --cache-from dt42-piggy-front-end:cache .`
-2. Docker: `docker run --rm -p 5000:5000 -it dt42-piggy-front-end`
+1. Build image: `docker build -t davidtnfsh/dt42_piggy_front_end --cache-from davidtnfsh/dt42_piggy_front_end:cache .`
+2. Docker: `docker run --rm -p 5000:5000 -it davidtnfsh/dt42_piggy_front_end:latest`
 3. Local: `npm start`
 
 ## Available Scripts
