@@ -1,9 +1,12 @@
 import React from "react";
-import { Header, Table, Rating } from "semantic-ui-react";
+import { Header, Table, Icon, Label } from "semantic-ui-react";
 
 export default class TableExamplePadded extends React.Component {
   constructor(props) {
     super(props);
+    this.dashboard_days = 7 + 1;
+    this.hours_per_day = 24 + 1;
+    this.step_of_hours_per_day = 3;
     this.state = {
       inferences: [],
     };
@@ -21,18 +24,55 @@ export default class TableExamplePadded extends React.Component {
       <Table celled padded>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell singleLine>TimeStamp</Table.HeaderCell>
-            <Table.HeaderCell>Channel</Table.HeaderCell>
-            <Table.HeaderCell>Annotations</Table.HeaderCell>
+            {Array.from(Array(this.dashboard_days).keys()).map((value) => (
+              <Table.HeaderCell singleLine>{value}</Table.HeaderCell>
+            ))}
           </Table.Row>
         </Table.Header>
+
         <Table.Body>
-          {this.state.inferences.map((value, index) => {
+          {this.range(
+            this.step_of_hours_per_day,
+            this.hours_per_day,
+            this.step_of_hours_per_day
+          ).map((hour) => {
             return (
-              <Table.Row key={index}>
-                <Table.Cell singleLine>{value["TIMESTAMP"]}</Table.Cell>
-                <Table.Cell singleLine>{value["CHANNEL"]}</Table.Cell>
-                <Table.Cell singleLine>{value["ANNOTATIONS"]}</Table.Cell>
+              <Table.Row>
+                <Table.Cell>
+                  <Header as="h2" textAlign="center">
+                    {hour}:00
+                  </Header>
+                </Table.Cell>
+                {this.range(1, this.dashboard_days, 1).map((day) => {
+                  return (
+                    <Table.Cell>
+                      {hour % 1 === false && (
+                        <Label>
+                          <Icon name="heart" />
+                          {hour}
+                        </Label>
+                      )}
+                      {hour % 2 === false && (
+                        <Label>
+                          <Icon name="frown" />
+                          {hour}
+                        </Label>
+                      )}
+                      {hour % 3 === false && (
+                        <Label>
+                          <Icon name="hospital" />
+                          {hour}
+                        </Label>
+                      )}
+                      {hour % 4 === false && (
+                        <Label>
+                          <Icon name="woman" />
+                          {hour}
+                        </Label>
+                      )}
+                    </Table.Cell>
+                  );
+                })}
               </Table.Row>
             );
           })}
@@ -40,4 +80,10 @@ export default class TableExamplePadded extends React.Component {
       </Table>
     );
   }
+  range = (start, end, step) => {
+    return Array.from(
+      Array.from(Array(Math.ceil((end - start) / step)).keys()),
+      (x) => start + x * step
+    );
+  };
 }
