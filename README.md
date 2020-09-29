@@ -14,6 +14,29 @@ Npm dependencies, for linter, formatter and commit linter (optional):
 2. Docker: `docker run --rm -p 5000:5000 -it davidtnfsh/dt42_piggy_front_end:latest`
 3. Local: `npm start`
 
+## Config
+### Dashboard Config
+
+> src/config/dashboardConfig.js
+
+```js
+const DashboardConfig = {
+  dashboard_days: 7,
+  hours_per_day: 24,
+  step_of_hours_per_day: 3,
+  icons: [
+    {
+      condition: (label) => label === "分娩",
+      icon: "heart",
+      color: "red",
+    },
+    {
+      other_icon: "something"
+    }
+  ],
+};
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
