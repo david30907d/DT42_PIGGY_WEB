@@ -19,6 +19,10 @@ Npm dependencies, for linter, formatter and commit linter (optional):
 
 > src/config/dashboardConfig.js
 
+* Condition: It's a arrow function which would return `true/false`, please implement your condition and the icon would be popped up when the condition is met.
+* Icon: You can use any icon tag in [semantic UI](https://react.semantic-ui.com/elements/icon/)
+* Color: You can use any color tag in [semantic UI](https://react.semantic-ui.com/elements/label/#variations-colored)
+
 ```js
 const DashboardConfig = {
   dashboard_days: 7,
