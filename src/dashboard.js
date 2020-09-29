@@ -1,11 +1,12 @@
 import React from "react";
 import { Header, Table, Icon, Label } from "semantic-ui-react";
+import DashboardConfig from "./config/dashboardConfig";
 export default class TableExamplePadded extends React.Component {
   constructor(props) {
     super(props);
-    this.dashboard_days = 7 + 1;
-    this.hours_per_day = 24 + 1;
-    this.step_of_hours_per_day = 3;
+    this.dashboard_days = DashboardConfig["dashboard_days"] + 1;
+    this.hours_per_day = DashboardConfig["hours_per_day"];
+    this.step_of_hours_per_day = DashboardConfig["step_of_hours_per_day"];
     this.state = {
       inferences: [],
     };
@@ -34,7 +35,7 @@ export default class TableExamplePadded extends React.Component {
         <Table.Body>
           {this.range(
             this.step_of_hours_per_day,
-            this.hours_per_day,
+            this.hours_per_day + 1,
             this.step_of_hours_per_day
           ).map((hour) => {
             return (
@@ -47,30 +48,19 @@ export default class TableExamplePadded extends React.Component {
                 {this.range(1, this.dashboard_days, 1).map((day) => {
                   return (
                     <Table.Cell key={`${day}_${hour}`}>
-                      {hour % 1 === 0 && (
-                        <Label key={`${day}_heart`}>
-                          <Icon name="heart" color="red" />
-                          {hour}
-                        </Label>
-                      )}
-                      {hour % 2 === 0 && (
-                        <Label key={`${day}_frown`}>
-                          <Icon name="frown" color="purple" />
-                          {hour}
-                        </Label>
-                      )}
-                      {hour % 3 === 0 && (
-                        <Label key={`${day}_hospital`}>
-                          <Icon name="hospital" color="blue" />
-                          {hour}
-                        </Label>
-                      )}
-                      {hour % 4 === 0 && (
-                        <Label key={`${day}_woman`}>
-                          <Icon name="woman" color="teal" />
-                          {hour}
-                        </Label>
-                      )}
+                      {DashboardConfig.icons.map((iconObject) => {
+                        return (
+                          iconObject["condition"](hour) && (
+                            <Label key={`${day}_${DashboardConfig["icon"]}`}>
+                              <Icon
+                                name={iconObject["icon"]}
+                                color={iconObject["color"]}
+                              />
+                              {hour}
+                            </Label>
+                          )
+                        );
+                      })}
                     </Table.Cell>
                   );
                 })}
