@@ -4,22 +4,26 @@ const DashboardConfig = {
   step_of_hours_per_day: 3,
   icons: [
     {
-      condition: (hour) => hour % 1 === 0,
+      condition: (annotation_dict) => annotation_dict && "person" in annotation_dict,
+      label: 'person',
       icon: "heart",
       color: "red",
     },
     {
-      condition: (hour) => hour % 2 === 0,
+      condition: (annotation_dict) => annotation_dict && "xxx" in annotation_dict,
+      label: 'birth',
       icon: "frown",
       color: "purple",
     },
     {
-      condition: (hour) => hour % 3 === 0,
+      condition: (annotation_dict) => annotation_dict && "xxx" in annotation_dict,
+      label: "horny",
       icon: "hospital",
       color: "blue",
     },
     {
-      condition: (hour) => hour % 4 === 0,
+      condition: (annotation_dict) => annotation_dict && "xxx" in annotation_dict,
+      label: "very  horny",
       icon: "woman",
       color: "teal",
     },
