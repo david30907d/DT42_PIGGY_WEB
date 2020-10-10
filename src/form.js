@@ -38,6 +38,7 @@ export default class FormExampleFieldErrorLabel extends React.Component {
       body: JSON.stringify(this.state),
       headers: new Headers({
         "Content-Type": "application/json",
+        Authorization: `Bearer ${window.localStorage["jwt"]}`,
       }),
     })
       .then((response) => response.json())

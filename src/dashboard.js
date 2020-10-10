@@ -14,6 +14,10 @@ export default class TableExamplePadded extends React.Component {
       `http://127.0.0.1:8000/dashboard?day=${DashboardConfig["dashboard_days"]}`,
       {
         method: "GET",
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${window.localStorage["jwt"]}`,
+        }),
       }
     )
       .then((response) => response.json())
