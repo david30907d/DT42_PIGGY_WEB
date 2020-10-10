@@ -15,7 +15,6 @@ export default class TableExamplePadded extends React.Component {
       {
         method: "GET",
         headers: new Headers({
-          "Content-Type": "application/json",
           Authorization: `Bearer ${window.localStorage["jwt"]}`,
         }),
       }
