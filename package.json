@@ -33,6 +33,7 @@
   "lint-staged": {
     "src/*.js": [
       "./node_modules/.bin/pretty-quick --write",
+      "eslint --fix src/*.js",
       "git add"
     ],
     "**/Dockerfile*": [
@@ -56,6 +57,7 @@
   },
   "devDependencies": {
     "commitlint": "^9.1.0",
+    "eslint-plugin-react": "^7.21.2",
     "git-cz": "^4.7.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",

@@ -10,9 +10,36 @@ Npm dependencies, for linter, formatter and commit linter (optional):
 
 ## Run
 
-1. Build image: `docker build -t dt42-piggy-front-end --cache-from dt42-piggy-front-end:cache .`
-2. Docker: `docker run --rm -p 5000:5000 -it dt42-piggy-front-end`
+1. Build image: `docker build -t davidtnfsh/dt42_piggy_front_end --cache-from davidtnfsh/dt42_piggy_front_end:cache .`
+2. Docker: `docker run --rm -p 5000:5000 -it davidtnfsh/dt42_piggy_front_end:latest`
 3. Local: `npm start`
+
+## Config
+### Dashboard Config
+
+> src/config/dashboardConfig.js
+
+* Condition: It's a arrow function which would return `true/false`, please implement your condition and the icon would be popped up when the condition is met.
+* Icon: You can use any icon tag in [semantic UI](https://react.semantic-ui.com/elements/icon/)
+* Color: You can use any color tag in [semantic UI](https://react.semantic-ui.com/elements/label/#variations-colored)
+
+```js
+const DashboardConfig = {
+  dashboard_days: 7,
+  hours_per_day: 24,
+  step_of_hours_per_day: 3,
+  icons: [
+    {
+      condition: (label) => label === "分娩",
+      icon: "heart",
+      color: "red",
+    },
+    {
+      other_icon: "something"
+    }
+  ],
+};
+```
 
 ## Available Scripts
 

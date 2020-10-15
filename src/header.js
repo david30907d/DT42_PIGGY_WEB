@@ -7,6 +7,7 @@ import history from "history/browser";
 import FormForSettings from "./form.js";
 import CameraPanes from "./cameraPanes.js";
 import RealTimeImage from "./realtime.js";
+import Login from "./login.js";
 
 export default class HeaderAndMenu extends Component {
   constructor(props) {
@@ -71,9 +72,9 @@ export default class HeaderAndMenu extends Component {
           <Menu.Menu position="right">
             <Menu.Item
               as={Link}
-              to={{ pathname: "/logout", search: this.state.search }}
-              name="logout"
-              active={this.state.activeItem === "logout"}
+              to={{ pathname: "/login", search: this.state.search }}
+              name="login"
+              active={this.state.activeItem === "login"}
               onClick={this.handleItemClick}
             />
           </Menu.Menu>
@@ -103,6 +104,9 @@ export default class HeaderAndMenu extends Component {
           </Route>
           <Route exact path="/dashboard">
             <Dashboard />
+          </Route>
+          <Route exact path="/login">
+            <Login />
           </Route>
         </Switch>
       </Router>
